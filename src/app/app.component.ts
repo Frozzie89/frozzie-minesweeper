@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TileComponent } from "./components/tile/tile.component";
+import { TileMatrixComponent } from './components/tile-matrix/tile-matrix.component';
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [RouterOutlet, TileComponent],
+    imports: [RouterOutlet, TileMatrixComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
 })

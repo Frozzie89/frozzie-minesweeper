@@ -1,0 +1,9 @@
+<div class="tile-grid" [ngStyle]="{ '--row-count': rowCount }">
+    <ng-container *ngFor="let row of tileMatrix.matrix">
+        <div>
+            <div *ngFor="let tile of row" class="tile">
+                <app-tile [tile]="tile"></app-tile>
+            </div>
+        </div>
+    </ng-container>
+</div>

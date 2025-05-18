@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Tile } from '../../classes/tile';
 import { FreeTile } from '../../classes/free-tile';
 import { BombTile } from '../../classes/bomb-tile';
@@ -14,18 +14,10 @@ import { faBomb } from '@fortawesome/free-solid-svg-icons';
     templateUrl: './tile.component.html',
     styleUrl: './tile.component.scss'
 })
-export class TileComponent implements OnInit {
+export class TileComponent {
 
-    tile!: Tile
+    @Input() tile!: Tile
     faBomb = faBomb
-
-    ngOnInit(): void {
-        if (Math.floor(Math.random() * 2) == 0) {
-            this.tile = new FreeTile(0, 0)
-        } else {
-            this.tile = new BombTile(0, 0)
-        }
-    }
 
     isBomb(): boolean {
         return this.tile instanceof BombTile
