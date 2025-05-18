@@ -1,3 +1,8 @@
 <mat-card [ngClass]="tile.isRevealed ? 'tile-revealed' : 'tile-unrevealed'" class="tile" (click)="clickTile()">
-    <div class="tile-content">3</div>
+    <div class="tile-content" *ngIf="isBomb()">
+        <fa-icon [icon]="faBomb"></fa-icon>
+    </div>
+    <div class="tile-content" *ngIf="!isBomb()">
+        0
+    </div>
 </mat-card>
