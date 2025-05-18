@@ -1,0 +1,27 @@
+.tile {
+    width: 150px;
+    height: 150px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+    margin: 16px;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.tile-unrevealed {
+    background-color: rgb(204, 0, 255);
+}
+
+.tile-revealed {
+    background-color: white;
+}
+
+.tile-content {
+    text-align: center;
+    font-family: Roboto, sans-serif;
+    font-size: 3em;
+    color: rgb(204, 0, 255);
+    transition: color 0.4s ease;
+}
