@@ -1,8 +1,7 @@
 export abstract class Tile {
-
-    private xPos: number
-    private yPos: number
-    private isRevealed: boolean = false
+    xPos: number
+    yPos: number
+    isRevealed: boolean = false
 
     constructor(xPos: number, yPos: number) {
         this.xPos = xPos
