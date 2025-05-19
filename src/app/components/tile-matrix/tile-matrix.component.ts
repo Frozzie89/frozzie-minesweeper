@@ -15,7 +15,9 @@ export class TileMatrixComponent implements OnInit {
     tileMatrix!: TileMatrix
 
     ngOnInit(): void {
-        this.tileMatrix = new TileMatrix(6, 9)
+        this.tileMatrix = new TileMatrix()
+        this.tileMatrix.init(9, 9)
+        this.tileMatrix.loadBombs(20)
         console.log(this.tileMatrix);
 
     }
