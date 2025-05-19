@@ -55,7 +55,23 @@ export class TileMatrix {
         tile.isRevealed = true;
         tile.adjacentBombs = this.countAdjacentBombs(tile);
 
-        // Optional: expand if tile.adjacentBombs === 0
+        // Stop if there are adjacent bombs
+        if (tile.adjacentBombs > 0) return;
+
+        // Recursively reveal neighbors
+        for (let dx = -1; dx <= 1; dx++) {
+            for (let dy = -1; dy <= 1; dy++) {
+                if (dx === 0 && dy === 0) continue;
+
+                const nx = tile.xPos + dx;
+                const ny = tile.yPos + dy;
+
+                if (this.isInBounds(nx, ny)) {
+                    const neighbor = this.matrix[nx][ny];
+                    this.revealTile(neighbor);
+                }
+            }
+        }
     }
 
     countAdjacentBombs(tile: Tile): number {
