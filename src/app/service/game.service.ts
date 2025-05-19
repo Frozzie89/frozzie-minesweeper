@@ -15,9 +15,40 @@ export class GameService {
         this.tileMatrix.init(9, 9)
     }
 
-    loadBombs(tile: Tile) {
-        this.tileMatrix.loadBombs(20, tile)
-        this.gameState = GameState.IN_GAME
+    loadBombs(tile: Tile): void {
+        const safeZone = this.tileMatrix.loadBombs(20, tile);
+        this.gameState = GameState.IN_GAME;
+
+        for (const [x, y] of safeZone) {
+            this.revealTile(this.tileMatrix.matrix[x][y]);
+        }
+    }
+
+    revealTile(tile: Tile): void {
+        if (tile.isRevealed || tile.isBomb) return;
+
+        tile.isRevealed = true;
+        tile.adjacentBombs = this.getAdjacentBombsCount(tile);
+
+        if (tile.adjacentBombs > 0) return;
+
+        const directions = [
+            [-1, 0], [-1, -1], [0, -1], [1, -1],
+            [1, 0], [1, 1], [0, 1], [-1, 1],
+        ];
+
+        for (const [dx, dy] of directions) {
+            const x = tile.xPos + dx;
+            const y = tile.yPos + dy;
+
+            if (
+                x >= 0 && x < this.tileMatrix.matrix.length &&
+                y >= 0 && y < this.tileMatrix.matrix[0].length
+            ) {
+                const neighbor = this.tileMatrix.matrix[x][y];
+                this.revealTile(neighbor);
+            }
+        }
     }
 
     getAdjacentBombsCount(tile: Tile): number {

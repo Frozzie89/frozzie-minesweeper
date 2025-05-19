@@ -24,75 +24,20 @@ export class TileMatrix {
         }
     }
 
-    loadBombs(bombCount: number, tileToIgnore: Tile) {
-        // Get safe zone: the clicked tile and its 8 neighbors
+    loadBombs(bombCount: number, tileToIgnore: Tile): [number, number][] {
         const safeZone = this.getSafeZone(tileToIgnore);
-
-        // Filter out safeZone from all possible positions
         const availablePositions = this.allPositions.filter(
             ([x, y]) => !safeZone.some(pos => pos[0] === x && pos[1] === y)
         );
 
-        // Randomly select bomb positions
         const bombPositions = this.shuffle(availablePositions).slice(0, bombCount);
 
-        // Place the bombs
         for (const [r, c] of bombPositions) {
             this.matrix[r][c] = new Tile(r, c, true);
         }
 
-        // Reveal the safe zone
-        for (const [x, y] of safeZone) {
-            const tile = this.matrix[x][y];
-            this.revealTile(tile);
-        }
-
+        return safeZone; // return safeZone for external handling
     }
-
-    revealTile(tile: Tile) {
-        if (tile.isRevealed || tile.isBomb) return;
-
-        tile.isRevealed = true;
-        tile.adjacentBombs = this.countAdjacentBombs(tile);
-
-        // Stop if there are adjacent bombs
-        if (tile.adjacentBombs > 0) return;
-
-        // Recursively reveal neighbors
-        for (let dx = -1; dx <= 1; dx++) {
-            for (let dy = -1; dy <= 1; dy++) {
-                if (dx === 0 && dy === 0) continue;
-
-                const nx = tile.xPos + dx;
-                const ny = tile.yPos + dy;
-
-                if (this.isInBounds(nx, ny)) {
-                    const neighbor = this.matrix[nx][ny];
-                    this.revealTile(neighbor);
-                }
-            }
-        }
-    }
-
-    countAdjacentBombs(tile: Tile): number {
-        let count = 0;
-
-        for (let dx = -1; dx <= 1; dx++) {
-            for (let dy = -1; dy <= 1; dy++) {
-                if (dx === 0 && dy === 0) continue;
-
-                const nx = tile.xPos + dx;
-                const ny = tile.yPos + dy;
-
-                if (this.isInBounds(nx, ny) && this.matrix[nx][ny].isBomb) {
-                    count++;
-                }
-            }
-        }
-
-        return count;
-    }
-
 
     private getSafeZone(tile: Tile): [number, number][] {
         const zone: [number, number][] = [];
