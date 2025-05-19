@@ -23,15 +23,12 @@ export class TileComponent {
     constructor(private gameService: GameService) { }
 
     clickTile(): void {
-        this.tile.onClick()
-
-        if (!this.tile.isBomb) {
-            this.tile.adjacentBombs = this.gameService.getAdjacentBombsCount(this.tile);
-        }
-
-        if (this.gameService.gameState == GameState.INIT) {
+        if (this.gameService.gameState === GameState.INIT) {
             this.gameService.loadBombs(this.tile)
+        } else if (!this.tile.isRevealed && !this.tile.isBomb) {
+            this.gameService.revealTile(this.tile)
+        } else {
+            this.tile.isRevealed = true
         }
     }
-
 }
