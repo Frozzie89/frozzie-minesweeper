@@ -40,7 +40,7 @@ export class TileComponent {
     }
 
     rightClickTile(): void {
-        if (!this.tile.isRevealed) {
+        if (!this.tile.isRevealed && this.gameService.gameState === GameState.IN_GAME) {
             this.tile.isFlagged = !this.tile.isFlagged
         }
     }
