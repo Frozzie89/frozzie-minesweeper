@@ -10,8 +10,4 @@ export class Tile {
         this.yPos = yPos
         this.isBomb = isBomb
     }
-
-    public onClick(): void {
-        this.isRevealed = true
-    }
 }
