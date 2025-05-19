@@ -25,7 +25,7 @@ export class GameService {
     }
 
     revealTile(tile: Tile): void {
-        if (tile.isRevealed || tile.isBomb) return;
+        if (tile.isRevealed || tile.isBomb || tile.isFlagged) return;
 
         tile.isRevealed = true;
         tile.adjacentBombs = this.getAdjacentBombsCount(tile);

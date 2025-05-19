@@ -1,8 +1,13 @@
-<mat-card [ngClass]="tile.isRevealed ? 'tile-revealed' : 'tile-unrevealed'" class="tile" (click)="clickTile()">
-    <div class="tile-content" *ngIf="tile.isBomb">
+<mat-card class="tile" [ngClass]="getTileCssClasses()" (click)="leftClickTile()" (contextmenu)="rightClickTile()">
+    <div class="tile-content" *ngIf="getTileContent() === 'bomb'">
         <fa-icon [icon]="faBomb"></fa-icon>
     </div>
-    <div class="tile-content" *ngIf="!tile.isBomb">
+
+    <div class="tile-content" *ngIf="getTileContent() === 'number'">
         {{ tile.adjacentBombs | tileNumberDisplay }}
+    </div>
+
+    <div class="tile-content" *ngIf="getTileContent() === 'flag'">
+        <fa-icon [icon]="faFlag"></fa-icon>
     </div>
 </mat-card>

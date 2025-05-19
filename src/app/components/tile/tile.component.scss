@@ -12,16 +12,22 @@
 
 .tile-unrevealed {
     background-color: rgb(204, 0, 255);
+    color: rgb(204, 0, 255);
+}
+
+.tile-flagged {
+    background-color: rgb(204, 0, 255);
+    color: white;
 }
 
 .tile-revealed {
     background-color: white;
+    color: rgb(204, 0, 255);
 }
 
 .tile-content {
     text-align: center;
     font-family: Roboto, sans-serif;
     font-size: 2em;
-    color: rgb(204, 0, 255);
     transition: color 0.4s ease;
 }

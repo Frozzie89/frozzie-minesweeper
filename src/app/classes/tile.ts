@@ -2,6 +2,7 @@ export class Tile {
     xPos: number
     yPos: number
     isBomb: boolean
+    isFlagged: boolean = false
     isRevealed: boolean = false
     adjacentBombs: number = 0
 
