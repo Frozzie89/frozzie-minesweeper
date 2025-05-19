@@ -1,20 +1,16 @@
-export abstract class Tile {
+export class Tile {
     xPos: number
     yPos: number
+    isBomb: boolean
     isRevealed: boolean = false
 
-    constructor(xPos: number, yPos: number) {
+    constructor(xPos: number, yPos: number, isBomb: boolean) {
         this.xPos = xPos
         this.yPos = yPos
+        this.isBomb = isBomb
     }
 
     public onClick(): void {
-        if (!this.isRevealed) {
-            this.doAction()
-        }
-
         this.isRevealed = true
     }
-
-    public abstract doAction(): void
 }

@@ -1,5 +1,3 @@
-import { BombTile } from "./bomb-tile";
-import { FreeTile } from "./free-tile";
 import { Tile } from "./tile";
 
 export class TileMatrix {
@@ -15,7 +13,7 @@ export class TileMatrix {
         for (var i: number = 0; i < xSize; i++) {
             this.matrix[i] = []
             for (var j: number = 0; j < ySize; j++) {
-                this.matrix[i][j] = new FreeTile(i, j);
+                this.matrix[i][j] = new Tile(i, j, false);
             }
         }
 
@@ -30,7 +28,7 @@ export class TileMatrix {
         const bombPositions = this.shuffle(this.allPositions).slice(0, bombCount);
 
         for (const [r, c] of bombPositions) {
-            this.matrix[r][c] = new BombTile(r, c)
+            this.matrix[r][c] = new Tile(r, c, true)
         }
     }
 

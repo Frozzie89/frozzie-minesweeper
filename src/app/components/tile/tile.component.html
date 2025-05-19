@@ -1,8 +1,8 @@
 <mat-card [ngClass]="tile.isRevealed ? 'tile-revealed' : 'tile-unrevealed'" class="tile" (click)="clickTile()">
-    <div class="tile-content" *ngIf="isBomb()">
+    <div class="tile-content" *ngIf="tile.isBomb">
         <fa-icon [icon]="faBomb"></fa-icon>
     </div>
-    <div class="tile-content" *ngIf="!isBomb()">
-        0
+    <div class="tile-content" *ngIf="!tile.isBomb">
+        {{ surroundingBombsNumber | tileNumberDisplay }}
     </div>
 </mat-card>
