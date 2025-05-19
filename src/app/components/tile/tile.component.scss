@@ -15,9 +15,14 @@
     color: rgb(204, 0, 255);
 }
 
-.tile-flagged {
-    background-color: rgb(204, 0, 255);
+.flag-visible {
     color: white;
+    transition: color 0.4s ease;
+}
+
+.flag-hidden {
+    color: rgb(204, 0, 255); // same as .tile-unrevealed background
+    transition: color 0.4s ease;
 }
 
 .tile-revealed {
