@@ -3,6 +3,7 @@ export class Tile {
     yPos: number
     isBomb: boolean
     isRevealed: boolean = false
+    adjacentBombs: number = 0
 
     constructor(xPos: number, yPos: number, isBomb: boolean) {
         this.xPos = xPos

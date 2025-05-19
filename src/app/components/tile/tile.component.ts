@@ -6,6 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBomb } from '@fortawesome/free-solid-svg-icons';
 import { GameService } from '../../service/game.service';
 import { TileNumberDisplayPipe } from "../../pipes/tile-number-display.pipe";
+import { GameState } from '../../classes/game-state';
 
 @Component({
     selector: 'app-tile',
@@ -17,15 +18,19 @@ import { TileNumberDisplayPipe } from "../../pipes/tile-number-display.pipe";
 export class TileComponent {
 
     @Input() tile!: Tile
-    surroundingBombsNumber: number = 0;
     faBomb = faBomb
 
     constructor(private gameService: GameService) { }
 
     clickTile(): void {
         this.tile.onClick()
+
         if (!this.tile.isBomb) {
-            this.surroundingBombsNumber = this.gameService.getSurroundingBombsNumber(this.tile);
+            this.tile.adjacentBombs = this.gameService.getAdjacentBombsCount(this.tile);
+        }
+
+        if (this.gameService.gameState == GameState.INIT) {
+            this.gameService.loadBombs(this.tile)
         }
     }
 

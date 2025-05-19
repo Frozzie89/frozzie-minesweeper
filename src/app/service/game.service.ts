@@ -1,20 +1,26 @@
 import { Injectable } from '@angular/core';
 import { TileMatrix } from '../classes/tile-matrix';
 import { Tile } from '../classes/tile';
+import { GameState } from '../classes/game-state';
 
 @Injectable({
     providedIn: 'root'
 })
 export class GameService {
     tileMatrix!: TileMatrix
+    gameState: GameState = GameState.INIT
 
     constructor() {
         this.tileMatrix = new TileMatrix()
         this.tileMatrix.init(9, 9)
-        this.tileMatrix.loadBombs(20)
     }
 
-    getSurroundingBombsNumber(tile: Tile): number {
+    loadBombs(tile: Tile) {
+        this.tileMatrix.loadBombs(20, tile)
+        this.gameState = GameState.IN_GAME
+    }
+
+    getAdjacentBombsCount(tile: Tile): number {
         let count = 0
         const directions = [
             [-1, 0], // top

@@ -3,6 +3,6 @@
         <fa-icon [icon]="faBomb"></fa-icon>
     </div>
     <div class="tile-content" *ngIf="!tile.isBomb">
-        {{ surroundingBombsNumber | tileNumberDisplay }}
+        {{ tile.adjacentBombs | tileNumberDisplay }}
     </div>
 </mat-card>
