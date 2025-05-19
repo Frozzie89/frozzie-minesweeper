@@ -25,7 +25,7 @@ export class TileComponent {
     constructor(private gameService: GameService) { }
 
     leftClickTile(): void {
-        if (this.tile.isFlagged) {
+        if (this.tile.isFlagged || this.gameService.gameState === GameState.GAME_OVER) {
             return
         }
 
@@ -35,6 +35,7 @@ export class TileComponent {
             this.gameService.revealTile(this.tile)
         } else {
             this.tile.isRevealed = true
+            this.gameService.gameState = GameState.GAME_OVER
         }
     }
 
