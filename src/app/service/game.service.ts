@@ -4,13 +4,15 @@ import { Tile } from '../classes/tile';
 import { GameState } from '../classes/game-state';
 import { Mode } from '../classes/mode';
 import { BehaviorSubject } from 'rxjs';
+import { Difficulty, GAME_CONFIGS } from '../classes/game-configs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class GameService {
     tileMatrix: TileMatrix = new TileMatrix()
-    totalBombs: number = 20
+    difficulty = GAME_CONFIGS[Difficulty.HARD]
+    totalBombs: number = this.difficulty.total_bombs
     flaggedTiles: number = 0
     mode: Mode = Mode.REVEALING
 
@@ -32,7 +34,7 @@ export class GameService {
     initMatrix() {
         this.setGameState(GameState.INIT)
         this.flaggedTiles = 0
-        this.tileMatrix.init(9, 9)
+        this.tileMatrix.init(this.difficulty.xSize, this.difficulty.ySize)
     }
 
     loadBombs(tile: Tile): void {
