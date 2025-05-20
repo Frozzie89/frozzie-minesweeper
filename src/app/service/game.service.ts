@@ -46,7 +46,7 @@ export class GameService {
 
         for (const row of this.tileMatrix.matrix) {
             for (const tile of row) {
-                if (tile.isBomb && !tile.isRevealed) {
+                if (tile.isBomb && !tile.isRevealed && !tile.isFlagged) {
                     bombTiles.push(tile);
                 }
             }
