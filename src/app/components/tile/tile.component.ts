@@ -7,6 +7,7 @@ import { faBomb, faFlag } from '@fortawesome/free-solid-svg-icons';
 import { GameService } from '../../service/game.service';
 import { TileNumberDisplayPipe } from "../../pipes/tile-number-display.pipe";
 import { GameState } from '../../classes/game-state';
+import { Mode } from '../../classes/mode';
 
 @Component({
     selector: 'app-tile',
@@ -24,7 +25,7 @@ export class TileComponent {
 
     constructor(private gameService: GameService) { }
 
-    leftClickTile(): void {
+    onRevealingMode() {
         if (this.tile.isFlagged || this.gameService.gameState === GameState.GAME_OVER) {
             return
         }
@@ -37,13 +38,26 @@ export class TileComponent {
             this.tile.isRevealed = true
             this.gameService.gameState = GameState.GAME_OVER
         }
+
     }
 
-    rightClickTile(): void {
+    onFlaggingMode() {
         if (!this.tile.isRevealed && this.gameService.gameState === GameState.IN_GAME) {
             this.gameService.flaggedTiles += this.tile.isFlagged ? -1 : 1
             this.tile.isFlagged = !this.tile.isFlagged
         }
+    }
+
+    leftClickTile(): void {
+        if (this.gameService.mode === Mode.REVEALING) {
+            this.onRevealingMode()
+        } else {
+            this.onFlaggingMode()
+        }
+    }
+
+    rightClickTile(): void {
+        this.onFlaggingMode()
     }
 
     getTileCssClasses(): { [key: string]: boolean } {

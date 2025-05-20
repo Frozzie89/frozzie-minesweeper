@@ -1,8 +1,9 @@
-<mat-button-toggle-group class="mode-toggle" name="mode" [hideSingleSelectionIndicator]="true">
-    <mat-button-toggle value="bomb" [checked]="true">
+<mat-button-toggle-group class="mode-toggle" name="mode" [hideSingleSelectionIndicator]="true" [(value)]="mode"
+    (change)="onToggleModeChange($event)">
+    <mat-button-toggle value="0" [checked]="true">
         <fa-icon [icon]="faBomb"></fa-icon>
     </mat-button-toggle>
-    <mat-button-toggle value="flag">
+    <mat-button-toggle value="1">
         <fa-icon [icon]="faFlag"></fa-icon>
     </mat-button-toggle>
 </mat-button-toggle-group>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { TileMatrix } from '../classes/tile-matrix';
 import { Tile } from '../classes/tile';
 import { GameState } from '../classes/game-state';
+import { Mode } from '../classes/mode';
 
 @Injectable({
     providedIn: 'root'
@@ -11,6 +12,7 @@ export class GameService {
     gameState: GameState = GameState.INIT
     totalBombs: number = 20
     flaggedTiles: number = 0
+    mode: Mode = Mode.REVEALING
 
     constructor() {
         this.tileMatrix = new TileMatrix()
