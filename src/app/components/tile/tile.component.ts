@@ -26,11 +26,11 @@ export class TileComponent {
     constructor(private gameService: GameService) { }
 
     onRevealingMode() {
-        if (this.tile.isFlagged || this.gameService.gameState === GameState.GAME_OVER) {
+        if (this.tile.isFlagged || this.gameService.getGameState() === GameState.GAME_OVER) {
             return
         }
 
-        if (this.gameService.gameState === GameState.INIT) {
+        if (this.gameService.getGameState() === GameState.INIT) {
             this.gameService.loadBombs(this.tile)
         } else if (!this.tile.isRevealed && !this.tile.isBomb) {
             this.gameService.revealTile(this.tile)
@@ -39,13 +39,13 @@ export class TileComponent {
             this.tile.isClickedBomb = true
             this.tile.isRevealed = true
             this.gameService.revealAllBombsStaggered()
-            this.gameService.gameState = GameState.GAME_OVER
+            this.gameService.setGameState(GameState.GAME_OVER)
         }
 
     }
 
     onFlaggingMode() {
-        if (!this.tile.isRevealed && this.gameService.gameState === GameState.IN_GAME) {
+        if (!this.tile.isRevealed && this.gameService.getGameState() === GameState.IN_GAME) {
             this.gameService.flaggedTiles += this.tile.isFlagged ? -1 : 1
             this.tile.isFlagged = !this.tile.isFlagged
         }

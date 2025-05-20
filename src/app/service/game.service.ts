@@ -3,19 +3,30 @@ import { TileMatrix } from '../classes/tile-matrix';
 import { Tile } from '../classes/tile';
 import { GameState } from '../classes/game-state';
 import { Mode } from '../classes/mode';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class GameService {
     tileMatrix: TileMatrix = new TileMatrix()
-    gameState: GameState = GameState.INIT
     totalBombs: number = 20
     flaggedTiles: number = 0
     mode: Mode = Mode.REVEALING
 
+    gameStateSubject = new BehaviorSubject<GameState>(GameState.INIT)
+    gameState$ = this.gameStateSubject.asObservable();
+
     constructor() {
         this.initMatrix()
+    }
+
+    getGameState(): GameState {
+        return this.gameStateSubject.value;
+    }
+
+    setGameState(gameState: GameState) {
+        this.gameStateSubject.next(gameState)
     }
 
     initMatrix() {
@@ -24,7 +35,7 @@ export class GameService {
 
     loadBombs(tile: Tile): void {
         const safeZone = this.tileMatrix.loadBombs(this.totalBombs, tile);
-        this.gameState = GameState.IN_GAME;
+        this.setGameState(GameState.IN_GAME);
 
         for (const [x, y] of safeZone) {
             this.revealTile(this.tileMatrix.matrix[x][y]);

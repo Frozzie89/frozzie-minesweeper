@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GameService } from '../../service/game.service';
 import { GameState } from '../../classes/game-state';
 import { NgIf } from '@angular/common';
 import {
     trigger,
-    state,
     style,
     transition,
     animate
 } from '@angular/animations';
+import { filter, Subscription } from 'rxjs';
 
 
 @Component({
@@ -29,26 +29,27 @@ import {
         ])
     ]
 })
-export class RetryComponent {
+export class RetryComponent implements OnInit {
+
+    private sub = new Subscription()
+    showRetry: boolean = false
 
     constructor(private gameService: GameService) {
     }
 
-    isShown(): boolean {
-        return this.gameService.gameState === GameState.GAME_OVER
+    ngOnInit(): void {
+        this.sub = this.gameService.gameState$
+            .pipe(filter(state => state === GameState.GAME_OVER))
+            .subscribe(() => {
+                setTimeout(() => {
+                    this.showRetry = true;
+                }, 2000);
+            });
     }
 
     resetGame() {
-        this.gameService.gameState = GameState.INIT
+        this.gameService.setGameState(GameState.INIT)
         this.gameService.initMatrix()
     }
-
-    getTileCssClasses(): { [key: string]: boolean } {
-        return {
-            ' ': this.gameService.gameState === GameState.GAME_OVER,
-            'not-shown': this.gameService.gameState !== GameState.GAME_OVER,
-        };
-    }
-
 
 }
