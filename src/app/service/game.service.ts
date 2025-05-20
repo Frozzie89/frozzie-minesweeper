@@ -30,6 +30,8 @@ export class GameService {
     }
 
     initMatrix() {
+        this.setGameState(GameState.INIT)
+        this.flaggedTiles = 0
         this.tileMatrix.init(9, 9)
     }
 

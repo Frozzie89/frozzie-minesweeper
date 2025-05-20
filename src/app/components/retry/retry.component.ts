@@ -48,7 +48,6 @@ export class RetryComponent implements OnInit {
     }
 
     resetGame() {
-        this.gameService.setGameState(GameState.INIT)
         this.showRetry = false
         this.gameService.initMatrix()
     }
