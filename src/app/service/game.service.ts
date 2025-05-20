@@ -41,6 +41,26 @@ export class GameService {
         }
     }
 
+    revealAllBombsStaggered(delay: number = 50) {
+        const bombTiles: Tile[] = [];
+
+        for (const row of this.tileMatrix.matrix) {
+            for (const tile of row) {
+                if (tile.isBomb && !tile.isRevealed) {
+                    bombTiles.push(tile);
+                }
+            }
+        }
+
+        bombTiles.forEach((tile, index) => {
+            setTimeout(() => {
+                tile.isRevealedGameOver = true
+                tile.isRevealed = true
+            }, delay * index);
+        });
+    }
+
+
     getAdjacentBombsCount(tile: Tile): number {
         return this.getAdjacentTiles(tile).filter(t => t.isBomb).length;
     }

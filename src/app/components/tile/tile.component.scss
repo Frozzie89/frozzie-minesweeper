@@ -30,6 +30,15 @@
     color: rgb(204, 0, 255);
 }
 
+.clicked-bomb {
+    background-color: red !important;
+}
+
+.bomb-revealed-gameover {
+    background-color: rgb(204, 0, 255);
+    color: white;
+}
+
 .tile-content {
     text-align: center;
     font-family: Roboto, sans-serif;

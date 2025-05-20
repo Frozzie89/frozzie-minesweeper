@@ -34,8 +34,11 @@ export class TileComponent {
             this.gameService.loadBombs(this.tile)
         } else if (!this.tile.isRevealed && !this.tile.isBomb) {
             this.gameService.revealTile(this.tile)
-        } else {
+        } else if (this.tile.isBomb) {
+            // debugger
+            this.tile.isClickedBomb = true
             this.tile.isRevealed = true
+            this.gameService.revealAllBombsStaggered()
             this.gameService.gameState = GameState.GAME_OVER
         }
 
@@ -62,6 +65,8 @@ export class TileComponent {
 
     getTileCssClasses(): { [key: string]: boolean } {
         return {
+            'bomb-revealed-gameover': this.tile.isRevealedGameOver,
+            'clicked-bomb': this.tile.isClickedBomb,
             'tile-revealed': this.tile.isRevealed,
             'tile-unrevealed': !this.tile.isRevealed,
             'tile-flagged': this.tile.isFlagged,
