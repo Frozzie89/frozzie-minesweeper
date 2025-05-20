@@ -10,7 +10,7 @@
     z-index: 1;
 }
 
-.bomb-counter-wrapper {
+.right-side-wrapper {
     height: 50%;
     display: flex;
     flex-direction: column;
@@ -23,10 +23,11 @@
 }
 
 @media (max-width: 1370px) {
-    .bomb-counter-wrapper {
+    .right-side-wrapper {
         position: static;
         transform: none;
         margin-top: 1rem;
+        flex-direction: row;
     }
 
     .game-container {
