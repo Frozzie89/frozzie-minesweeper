@@ -3,11 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { TileMatrixComponent } from './components/tile-matrix/tile-matrix.component';
 import { BombCounterComponent } from "./components/bomb-counter/bomb-counter.component";
 import { TitleComponent } from "./components/title/title.component";
+import { ModeComponent } from "./components/mode/mode.component";
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [RouterOutlet, TileMatrixComponent, BombCounterComponent, TitleComponent],
+    imports: [RouterOutlet, TileMatrixComponent, BombCounterComponent, TitleComponent, ModeComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
 })

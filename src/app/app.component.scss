@@ -11,6 +11,11 @@
 }
 
 .bomb-counter-wrapper {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     position: absolute;
     right: 10%;
     top: 50%;
