@@ -11,8 +11,7 @@ import { Difficulty, GAME_CONFIGS } from '../classes/game-configs';
 })
 export class GameService {
     tileMatrix: TileMatrix = new TileMatrix()
-    difficulty = GAME_CONFIGS[Difficulty.HARD]
-    totalBombs: number = this.difficulty.total_bombs
+    difficulty = GAME_CONFIGS[Difficulty.TOO_EASY]
     flaggedTiles: number = 0
     mode: Mode = Mode.REVEALING
 
@@ -38,7 +37,7 @@ export class GameService {
     }
 
     loadBombs(tile: Tile): void {
-        const safeZone = this.tileMatrix.loadBombs(this.totalBombs, tile);
+        const safeZone = this.tileMatrix.loadBombs(this.difficulty.total_bombs, tile);
         this.setGameState(GameState.IN_GAME);
 
         for (const [x, y] of safeZone) {

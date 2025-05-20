@@ -17,7 +17,7 @@ export class BombCounterComponent {
     constructor(private gameService: GameService) { }
 
     bombCount(): number {
-        return this.gameService.totalBombs - this.gameService.flaggedTiles
+        return this.gameService.difficulty.total_bombs - this.gameService.flaggedTiles
     }
 
 }
