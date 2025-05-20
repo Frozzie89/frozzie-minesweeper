@@ -1,0 +1,16 @@
+p {
+    color: rgba(204, 0, 255, 0.600);
+    font-family: Roboto, sans-serif;
+    font-size: 3em;
+    user-select: none;
+    font-weight: bold;
+    text-align: center;
+    transition: color 0.4s ease;
+
+}
+
+p:hover {
+    color: rgb(204, 0, 255);
+    transition: color 0.4s ease;
+    cursor: pointer;
+}

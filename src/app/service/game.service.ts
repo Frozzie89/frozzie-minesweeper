@@ -8,14 +8,17 @@ import { Mode } from '../classes/mode';
     providedIn: 'root'
 })
 export class GameService {
-    tileMatrix!: TileMatrix
+    tileMatrix: TileMatrix = new TileMatrix()
     gameState: GameState = GameState.INIT
     totalBombs: number = 20
     flaggedTiles: number = 0
     mode: Mode = Mode.REVEALING
 
     constructor() {
-        this.tileMatrix = new TileMatrix()
+        this.initMatrix()
+    }
+
+    initMatrix() {
         this.tileMatrix.init(9, 9)
     }
 
