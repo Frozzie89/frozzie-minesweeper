@@ -16,3 +16,15 @@
     top: 50%;
     transform: translateY(-50%);
 }
+
+@media (max-width: 1370px) {
+    .bomb-counter-wrapper {
+        position: static;
+        transform: none;
+        margin-top: 1rem;
+    }
+
+    .game-container {
+        flex-direction: column;
+    }
+}
