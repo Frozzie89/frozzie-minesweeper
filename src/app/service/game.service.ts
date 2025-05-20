@@ -11,15 +11,16 @@ import { Difficulty, GAME_CONFIGS } from '../classes/game-configs';
 })
 export class GameService {
     tileMatrix: TileMatrix = new TileMatrix()
-    difficulty = GAME_CONFIGS[Difficulty.TOO_EASY]
+    difficulty = GAME_CONFIGS[Difficulty.MEDIUM]
     flaggedTiles: number = 0
     mode: Mode = Mode.REVEALING
+    hasWon: boolean = false;
 
     gameStateSubject = new BehaviorSubject<GameState>(GameState.INIT)
     gameState$ = this.gameStateSubject.asObservable();
 
     constructor() {
-        this.initMatrix()
+        this.initGame()
     }
 
     getGameState(): GameState {
@@ -30,9 +31,10 @@ export class GameService {
         this.gameStateSubject.next(gameState)
     }
 
-    initMatrix() {
+    initGame() {
         this.setGameState(GameState.INIT)
         this.flaggedTiles = 0
+        this.hasWon = false
         this.tileMatrix.init(this.difficulty.xSize, this.difficulty.ySize)
     }
 
@@ -80,6 +82,31 @@ export class GameService {
 
     getAdjacentBombsCount(tile: Tile): number {
         return this.getAdjacentTiles(tile).filter(t => t.isBomb).length;
+    }
+
+    checkWinCondition(): boolean {
+        for (const row of this.tileMatrix.matrix) {
+            for (const tile of row) {
+                // If a bomb is not flagged → can't win
+                if (tile.isBomb && !tile.isFlagged) {
+                    return false;
+                }
+
+                // If a non-bomb tile is flagged → can't win
+                if (!tile.isBomb && tile.isFlagged) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    handleWinning() {
+        if (!this.hasWon) {
+            this.hasWon = true
+            this.setGameState(GameState.GAME_OVER)
+        }
     }
 
     private getAdjacentTiles(tile: Tile): Tile[] {

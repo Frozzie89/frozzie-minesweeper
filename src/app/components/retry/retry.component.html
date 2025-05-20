@@ -1,1 +1,2 @@
-<p *ngIf="showRetry" @fadeInOut (click)="resetGame()">Retry ?</p>
+<p *ngIf="isWon()" @fadeInOut class="win-msg">You win !</p>
+<p *ngIf="showRetry" @fadeInOut class="retry" (click)="resetGame()">Try again ?</p>

@@ -48,6 +48,10 @@ export class TileComponent {
         if (!this.tile.isRevealed && this.gameService.getGameState() === GameState.IN_GAME) {
             this.gameService.flaggedTiles += this.tile.isFlagged ? -1 : 1
             this.tile.isFlagged = !this.tile.isFlagged
+
+            if (this.gameService.checkWinCondition()) {
+                this.gameService.handleWinning()
+            }
         }
     }
 

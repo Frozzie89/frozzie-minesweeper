@@ -47,9 +47,13 @@ export class RetryComponent implements OnInit {
             });
     }
 
+    isWon(): boolean {
+        return this.gameService.hasWon
+    }
+
     resetGame() {
         this.showRetry = false
-        this.gameService.initMatrix()
+        this.gameService.initGame()
     }
 
 }
