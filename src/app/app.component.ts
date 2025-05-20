@@ -5,11 +5,12 @@ import { BombCounterComponent } from "./components/bomb-counter/bomb-counter.com
 import { TitleComponent } from "./components/title/title.component";
 import { ModeComponent } from "./components/mode/mode.component";
 import { RetryComponent } from "./components/retry/retry.component";
+import { BottomRowComponent } from "./components/bottom-row/bottom-row.component";
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [RouterOutlet, TileMatrixComponent, BombCounterComponent, TitleComponent, ModeComponent, RetryComponent],
+    imports: [RouterOutlet, TileMatrixComponent, BombCounterComponent, TitleComponent, ModeComponent, RetryComponent, BottomRowComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
 })
