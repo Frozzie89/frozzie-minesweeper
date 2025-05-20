@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  frozzie-minesweeper:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ${IMAGE_NAME:-frozzie-minesweeper}:${IMAGE_VERSION:-latest}
+    ports:
+      - "${PORT:-4200}:${PORT:-4200}"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=4200
+    command: >
+      bash -c "ng serve --host=${HOST:-0.0.0.0} --port=${PORT:-4200}"
