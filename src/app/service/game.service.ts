@@ -9,6 +9,8 @@ import { GameState } from '../classes/game-state';
 export class GameService {
     tileMatrix!: TileMatrix
     gameState: GameState = GameState.INIT
+    totalBombs: number = 20
+    flaggedTiles: number = 0
 
     constructor() {
         this.tileMatrix = new TileMatrix()
@@ -16,7 +18,7 @@ export class GameService {
     }
 
     loadBombs(tile: Tile): void {
-        const safeZone = this.tileMatrix.loadBombs(20, tile);
+        const safeZone = this.tileMatrix.loadBombs(this.totalBombs, tile);
         this.gameState = GameState.IN_GAME;
 
         for (const [x, y] of safeZone) {
